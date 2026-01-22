@@ -1,0 +1,71 @@
+html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ship Nhanh BMT</title>
+    <style>
+        body { 
+            background-color: #f0f2f5; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+        h1 { color: #2c3e50; margin-bottom: 20px; }
+        .btn-call { 
+            width: 220px; 
+            height: 220px; 
+            border-radius: 50%; 
+            border: 8px solid #fff;
+            background: linear-gradient(145deg, #2ecc71, #27ae60);
+            color: white; 
+            font-size: 22px; 
+            font-weight: bold; 
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.4);
+            transition: all 0.2s ease;
+        }
+        .btn-call:active { 
+            transform: scale(0.9); 
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2); 
+        }
+        .status { margin-top: 15px; color: #7f8c8d; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <h1>SHIP NHANH BMT</h1>
+    <button class="btn-call" onclick="goiXe()">GỌI SHIPPER</button>
+    <p class="status">Bấm nút để báo cho nhóm tài xế</p>
+
+    <script>
+        // Thông tin đã cấu hình sẵn của bạn
+        const TOKEN = '8251293797:AAE5A40riCoy1beLSk1PR3ISitWKdMjccgw';
+        const CHAT_ID = '-1003423253125';
+
+        function goiXe() {
+            const thoiGian = new Date().toLocaleTimeString('vi-VN');
+            const noiDung = `📢 SHIP NHANH BMT\n───────────────\n🔔 CÓ KHÁCH ĐẶT XE!\n⏰ Lúc: ${thoiGian}\n📍 Vui lòng kiểm tra mục tin nhắn.`;
+            
+            const url = `https://api.telegram.org{TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(noiDung)}`;
+
+            fetch(url)
+            .then(res => {
+                if(res.ok) {
+                    alert("✅ Đã gửi thông báo thành công đến đội ngũ Ship Nhanh BMT!");
+                } else {
+                    alert("❌ Lỗi: Không thể gửi yêu cầu. Vui lòng thử lại.");
+                }
+            })
+            .catch(err => {
+                alert("Lỗi kết nối mạng!");
+            });
+        }
+    </script>
+</body>
+</html>
